@@ -86,7 +86,9 @@ def main(args):
         path = args.f + args.run + '/'
 
     # Identify all samples in the runfolder requested
-    samples = os.listdir(path)
+    path_files = os.listdir(path)
+
+    samples = [sample for sample in path_files if sample.endswith(".xls")]
 
 
 
@@ -103,7 +105,7 @@ def main(args):
     # Creates a list of the brca samples in the runfolder
     brca_samples = []
     for sample in samples:
-        if sample.startswith("C01") and sample.endswith("b.xls"):
+        if sample.startswith("C01") and (sample.endswith("b.xls") or sample.endswith("bW.xls")):
             brca_samples.append(sample)
 
     # Copy of the brca list to append a Total column and create an empty dataframe
